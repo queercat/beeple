@@ -1,0 +1,96 @@
+[gd_scene format=3 uid="uid://8m8wdtow8l1s"]
+
+[ext_resource type="Script" uid="uid://ca7pet8aapcie" path="res://scripts/ui.gd" id="1_lbhrr"]
+[ext_resource type="PackedScene" uid="uid://ducsg1pyl1038" path="res://scenes/beeple.tscn" id="1_uwrxv"]
+[ext_resource type="Script" uid="uid://8tpdi1vj7i6w" path="res://scripts/upgrade_menu.gd" id="2_iywne"]
+[ext_resource type="Texture2D" uid="uid://d2thaaknrkblm" path="res://sprites/BeepleCollection.png" id="2_lnu2h"]
+[ext_resource type="Script" uid="uid://bwa0knios3hi" path="res://scripts/suck_pollen.gd" id="3_lbhrr"]
+[ext_resource type="Script" uid="uid://yaiore0r1h5h" path="res://scripts/menu/production.gd" id="3_p57ef"]
+[ext_resource type="Script" uid="uid://dbpbo5nxfwlnl" path="res://scripts/menu/capacity.gd" id="4_u5sy4"]
+[ext_resource type="Shader" uid="uid://rf6o06i1ty71" path="res://shader/bg.gdshader" id="8_gee14"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_0tnpc"]
+shader = ExtResource("8_gee14")
+shader_parameter/movement_speed = 0.1
+shader_parameter/movement_scale = 2.0
+shader_parameter/color_1 = Color(0, 0.63, 0.49, 1)
+shader_parameter/color_2 = Color(0.16, 0.16, 0.16, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_8cj0n"]
+font_size = 48
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_iywne"]
+radius = 214.1071
+
+[sub_resource type="AudioStreamPolyphonic" id="AudioStreamPolyphonic_p57ef"]
+
+[node name="Game" type="Node2D" unique_id=866814563]
+
+[node name="UI" type="Control" parent="." unique_id=455686704 node_paths=PackedStringArray("honey_label")]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("1_lbhrr")
+honey_label = NodePath("Honey")
+
+[node name="Panel" type="Panel" parent="UI" unique_id=2104758335]
+material = SubResource("ShaderMaterial_0tnpc")
+layout_mode = 0
+offset_right = 1152.0
+offset_bottom = 648.0
+mouse_filter = 2
+
+[node name="Honey" type="Label" parent="UI" unique_id=672845226]
+layout_mode = 0
+offset_left = 12.0
+offset_top = 15.0
+offset_right = 228.0
+offset_bottom = 103.0
+text = "Honey: 0"
+label_settings = SubResource("LabelSettings_8cj0n")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="UI" unique_id=1667058882]
+layout_mode = 0
+offset_left = 17.0
+offset_top = 85.0
+offset_right = 202.0
+offset_bottom = 128.0
+script = ExtResource("2_iywne")
+
+[node name="Production" type="Button" parent="UI/VBoxContainer" unique_id=1366279998]
+layout_mode = 2
+disabled = true
+alignment = 0
+script = ExtResource("3_p57ef")
+
+[node name="Capacity" type="Button" parent="UI/VBoxContainer" unique_id=2136892054 node_paths=PackedStringArray("beeple")]
+layout_mode = 2
+disabled = true
+text = "+ Honey Capacity (5)"
+alignment = 0
+script = ExtResource("4_u5sy4")
+beeple = NodePath("../../../Beeple")
+
+[node name="BeepleCollection" type="Sprite2D" parent="." unique_id=2007706864 node_paths=PackedStringArray("collection_area")]
+position = Vector2(1124, 620.99994)
+rotation = -0.677478
+scale = Vector2(0.3244275, 0.32442746)
+texture = ExtResource("2_lnu2h")
+script = ExtResource("3_lbhrr")
+collection_area = NodePath("Area2D")
+
+[node name="Area2D" type="Area2D" parent="BeepleCollection" unique_id=1878019408]
+position = Vector2(0.00018813189, -138.70589)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="BeepleCollection/Area2D" unique_id=43436488]
+shape = SubResource("CircleShape2D_iywne")
+
+[node name="Beeple" parent="." unique_id=1763042537 instance=ExtResource("1_uwrxv")]
+position = Vector2(589, 335)
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="." unique_id=1595596317]
+stream = SubResource("AudioStreamPolyphonic_p57ef")
+
+[connection signal="area_entered" from="BeepleCollection/Area2D" to="BeepleCollection" method="_on_area_2d_area_entered"]
+[connection signal="area_exited" from="BeepleCollection/Area2D" to="BeepleCollection" method="_on_area_2d_area_exited"]

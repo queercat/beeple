@@ -1,0 +1,22 @@
+[gd_scene format=3 uid="uid://dijaxkls88imh"]
+
+[ext_resource type="Texture2D" uid="uid://c1oiij5xwkkkq" path="res://sprites/Pollen.png" id="1_kucah"]
+[ext_resource type="Script" uid="uid://du1ocp5d0jc4s" path="res://scripts/pollen.gd" id="2_aoftc"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_0hol4"]
+radius = 99.39673
+
+[node name="Pollen" type="Sprite2D" unique_id=1918153065 node_paths=PackedStringArray("area2d")]
+scale = Vector2(0.31188118, 0.31188118)
+texture = ExtResource("1_kucah")
+script = ExtResource("2_aoftc")
+area2d = NodePath("Area2D")
+metadata/pollen = true
+
+[node name="Area2D" type="Area2D" parent="." unique_id=1878331135]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" unique_id=1205802274]
+shape = SubResource("CircleShape2D_0hol4")
+
+[connection signal="mouse_entered" from="Area2D" to="." method="_on_area_2d_mouse_entered"]
+[connection signal="mouse_exited" from="Area2D" to="." method="_on_area_2d_mouse_exited"]

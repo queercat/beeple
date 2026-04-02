@@ -1,0 +1,50 @@
+[gd_scene format=3 uid="uid://ducsg1pyl1038"]
+
+[ext_resource type="Script" uid="uid://dlvcmj23w4h1d" path="res://scripts/beeple_prototype.gd" id="1_4s3qa"]
+[ext_resource type="PackedScene" uid="uid://dijaxkls88imh" path="res://scenes/pollen.tscn" id="3_si3we"]
+[ext_resource type="Texture2D" uid="uid://da5c6fs8k57gd" path="res://sprites/Beeple.png" id="4_o2wpi"]
+[ext_resource type="Script" uid="uid://dv4d4yfccrrlw" path="res://scripts/pollen_spawn.gd" id="5_upgvl"]
+
+[node name="Beeple" type="Node2D" unique_id=1763042537 node_paths=PackedStringArray("pollen_spawns")]
+script = ExtResource("1_4s3qa")
+pollen_prefab = ExtResource("3_si3we")
+pollen_spawns = [NodePath("PollenSpawn0"), NodePath("PollenSpawn1"), NodePath("PollenSpawn2"), NodePath("PollenSpawn3"), NodePath("PollenSpawn4"), NodePath("PollenSpawn5"), NodePath("PollenSpawn6"), NodePath("PollenSpawn7")]
+
+[node name="Sprite" type="Sprite2D" parent="." unique_id=1970707736]
+position = Vector2(5.5, -7.500001)
+scale = Vector2(0.15625, 0.15625)
+texture = ExtResource("4_o2wpi")
+
+[node name="PollenSpawn0" type="Node2D" parent="." unique_id=102878065]
+position = Vector2(-58.500122, 32.49997)
+script = ExtResource("5_upgvl")
+is_disabled = false
+
+[node name="PollenSpawn1" type="Node2D" parent="." unique_id=1199454402]
+position = Vector2(-52.500122, -14.5000305)
+script = ExtResource("5_upgvl")
+is_disabled = false
+
+[node name="PollenSpawn2" type="Node2D" parent="." unique_id=1385643804]
+position = Vector2(-36.500122, -45.50003)
+script = ExtResource("5_upgvl")
+
+[node name="PollenSpawn3" type="Node2D" parent="." unique_id=1219806651]
+position = Vector2(1.4998779, -67.50003)
+script = ExtResource("5_upgvl")
+
+[node name="PollenSpawn4" type="Node2D" parent="." unique_id=240462254]
+position = Vector2(51.499878, -90.50003)
+script = ExtResource("5_upgvl")
+
+[node name="PollenSpawn5" type="Node2D" parent="." unique_id=478931424]
+position = Vector2(-0.5001221, 0.49996948)
+script = ExtResource("5_upgvl")
+
+[node name="PollenSpawn6" type="Node2D" parent="." unique_id=79518851]
+position = Vector2(61.499878, -24.50003)
+script = ExtResource("5_upgvl")
+
+[node name="PollenSpawn7" type="Node2D" parent="." unique_id=59164075]
+position = Vector2(60.499878, 22.49997)
+script = ExtResource("5_upgvl")
